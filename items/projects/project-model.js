@@ -5,6 +5,8 @@ module.exports = {
     findById,
     findTasks,
     add,
+    addTask,
+    editTask,
     update,
     remove
 }
@@ -29,6 +31,19 @@ function add(data) {
         .then(ids => {
             return findById(ids[0])
         })
+}
+function addTask(data, id) {
+    return db('task')
+        .where({ id })
+        .insert(data)
+        .then(ids => {
+            return findById(ids[0])
+        })
+}
+function editTask(changes, id) {
+    return db('task')
+        .where({ id })
+        .update(changes)
 }
 function update(changes, id) {
     return db('project')

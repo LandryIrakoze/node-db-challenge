@@ -58,6 +58,26 @@ router.post('/', (req, res) => {
         });
 });
 
+router.post('/:id/tasks', (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
+
+    Projects.findById(id)
+        .then(project => {
+            if (project) {
+                Projects.addTask(data, id)
+                .then(updatedproject => {
+                    res.json(updatedproject);
+                });
+            } else {
+                res.status(404).json({ message: 'Could not find project with given id' });
+            }
+        })
+        .catch (err => {
+            res.status(500).json({ message: 'Failed to update project' });
+        });
+});
+
 router.put('/:id', (req, res) => {
     const { id } = req.params;
     const changes = req.body;
