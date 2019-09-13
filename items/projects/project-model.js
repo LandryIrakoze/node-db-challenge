@@ -21,7 +21,7 @@ function findTasks(id) {
     return db('task')
         .join('project', 'task.project_id', 'project.id')
         .where('project.id', id)
-        .select('project.name', 'schemes.scheme_name', 'task.description', 'task.notes', 'task.isCompleted')
+        .select('project.name', 'task.description', 'task.notes', 'task.isCompleted')
 }
 function add(data) {
     return db('project')
