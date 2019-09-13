@@ -1,11 +1,14 @@
 const express = require('express');
 const server = express();
 
-const ProjectRouter = require('./items/projects/project-router.js')
+const ProjectRouter = require('./items/projects/project-router.js');
+const ResourceRouter = require('./items/resources/resource-router.js');
 
 server.use(express.json());
 
-server.use('/api/projects', ProjectRouter)
+server.use('/api/projects', ProjectRouter);
+server.use('/api/resources', ResourceRouter);
+
 
 server.get('/', (req, res) => {
     res.send({ message: 'api up...' })
